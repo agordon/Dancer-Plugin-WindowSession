@@ -14,6 +14,7 @@ WriteMakefile(
     PREREQ_PM => {
         'Dancer' => 1.3000,
         'Clone' => 0,
+	'Test::More' => 0,
     },
     dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean               => { FILES => 'Dancer-Plugin-WindowSession-*' },

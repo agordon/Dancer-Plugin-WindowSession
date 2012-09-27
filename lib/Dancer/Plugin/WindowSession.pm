@@ -63,14 +63,14 @@ sub _get_window_session_object
 
 hook before => sub {
 	debug "Before-Hook: Getting Window-Session";
-	my $window_session = get_window_session_object;
-	my $window_session_id = window_session_id;
+	my $window_session = _get_window_session_object;
+	my $window_session_id = $window_session->id;
 };
 
 hook before_template_render => sub {
 	my $tokens = shift ;
 
-	my $window_session = get_window_session_object;
+	my $window_session = _get_window_session_object;
 
 	$tokens->{winsid} = $window_session->id;
 	$tokens->{window_session} = Clone::clone($window_session);
@@ -79,20 +79,20 @@ hook before_template_render => sub {
 };
 
 hook after => sub {
-	my $window_session = get_window_session_object;
+	my $window_session = _get_window_session_object;
 	my $window_session_id = $window_session->id;
 	debug "After-Hook: Saving Window-Session: $window_session_id";
 	$window_session->flush();
 };
 
 register window_session_id => sub {
-	my $window_session = get_window_session_object;
+	my $window_session = _get_window_session_object;
 	return $window_session->id;
-}
+};
 
 
 register window_session => sub {
-	my $window_session = get_window_session_object;
+	my $window_session = _get_window_session_object;
 	my $window_session_id = $window_session->id;
 
 	my ($key,$value) = @_;
@@ -111,7 +111,7 @@ register window_session => sub {
 		debug "Window-Session ($window_session_id), retrieving $key: returning $valuestr";
 	}
 	return ;
-}
+};
 
 register_plugin;
 
