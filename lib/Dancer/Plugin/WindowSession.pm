@@ -107,8 +107,9 @@ register window_session => sub {
 		## read operation, as in:
 		##   my $data = window_session 'varname';
 		$value = $window_session->{$key};
-		my $valuestr = $value //="(undefined)";
+		my $valuestr = $value // "(undefined)";
 		debug "Window-Session ($window_session_id), retrieving $key: returning $valuestr";
+		return $value if defined $value;
 	}
 	return ;
 };
