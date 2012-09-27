@@ -191,7 +191,6 @@ This module makes it easy to manage per-window session variables (as opposed to 
 
 The common use case is when you expect users of your website to have multiple web-browser windows open with your web-site, and for each open window you want to maintain independant set of variables.
 
-See working example at: L<http://winsid.cancan.cshl.edu> .
 
 =head1 IMPLEMENTATION
 
@@ -224,7 +223,9 @@ L<Dancer>, L<Dancer::Plugin>
 
 =head1 Example
 
-See the C<eg/> directory for a complete working example. Run: C<perl eg/example/bin/app.pl>
+See working example at: L<http://winsid.cancan.cshl.edu> .
+
+See the C<eg/> directory for a complete source of the example. Run: C<perl -I./lib/ eg/example/bin/app.pl> then visit L<http://localhost:3000> .
 
 =head1 SUPPORT
 
