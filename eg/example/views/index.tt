@@ -1,0 +1,33 @@
+[% USE Dumper %]
+
+<div class="container">
+
+<h1>Dancer::Plugin::WindowSession Example</h1>
+
+<button class="btn btn-info btn-small" data-toggle="collapse" href="#show_variables">Show Dancer's Template Variables</button>
+<br/>
+<div id="show_variables" class="collapse out">
+<pre>
+## Per-Window Session Variables (unique to each open browser window/tab) ##
+[% Dumper.dump(window_session) %]
+
+## Per-Session Variables (shared between all open browser windows/tabs) ##
+
+[% Dumper.dump(session) %]
+</pre>
+</div> <!-- show_variables -->
+
+
+<h2>Hello [% session.username %]</h2>
+
+Here's your chart:
+<br/>
+<br/>
+
+<img src="image.png?winsid=[% winsid | uri %]"/>
+
+<br/>
+<a class="btn btn-primary" href="settings?winsid=[% winsid | uri %]">Change Image Settings</a>
+<a class="btn btn-danger" target="_blank" href="/">Open a new Browser Window</a>
+
+</div> <!-- container -->
