@@ -26,10 +26,10 @@ get '/' => sub {
 };
 
 get '/image.png' => sub {
-	my $img_width = (window_session 'plot_width') || 400 ;
-	my $img_height = (window_session 'plot_height') || 300 ;
-	my $plot_type = (window_session 'plot_type') || "bars";
-	my $plot_color = (window_session 'plot_color') || "blue" ;
+	my $img_width  = window_session('plot_width') || 400 ;
+	my $img_height = window_session('plot_height') || 300 ;
+	my $plot_type  = window_session('plot_type') || "bars";
+	my $plot_color = window_session( 'plot_color') || "blue" ;
 
 	my $g;
 	if ($plot_type eq "bars") {
@@ -71,11 +71,11 @@ post '/settings' => sub {
 
 	## Get the variables, as submitted by the user
 	## NOTE: This is just a demo, so no input validation is performed.
-	my $username = (param 'username') || "Unknown User";
-	my $plot_type = (param 'plot_type') || "bars" ;
-	my $plot_color = (param 'plot_color') || "blue";
-	my $plot_width = (param 'plot_width') || 400 ;
-	my $plot_height = (param 'plot_height') || 300 ;
+	my $username   = param('username') || "Unknown User";
+	my $plot_type  = param('plot_type') || "bars" ;
+	my $plot_color = param('plot_color') || "blue";
+	my $plot_width = param('plot_width') || 400 ;
+	my $plot_height= param('plot_height') || 300 ;
 
 	# Save the username as a session variable
 	session 'username' => $username;
