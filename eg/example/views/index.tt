@@ -56,7 +56,7 @@ Use this Dancer module if you need to maintain independent state variables for e
 Most commonly: On bioinformatic-related websites, users want to view the same data in different ways, and compare the views side-by-side.
 </li>
 
-<li>A simpler, alternative implementation would be to pass the all CGI variables in every URL (e.g. <a href="#">/generate_plot.pl?plot_type=bars&plot_color=blue&plot_width=400&plot_height=300</a>) - but as you need more and more parameters, this method becomes combuersome to implement.
+<li>A simpler, alternative implementation would be to pass the all CGI variables in every URL (e.g. <a href="#">/generate_plot.pl?plot_type=bars&plot_color=blue&plot_width=400&plot_height=300</a>) - but as you need more and more parameters, this method becomes cumbersome to implement.
 </li>
 </ul>
 
