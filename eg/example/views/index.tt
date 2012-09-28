@@ -9,11 +9,11 @@
 <div id="show_variables" class="collapse out">
 <pre>
 ## Per-Window Session Variables (unique to each open browser window/tab) ##
-[% Dumper.dump(window_session) %]
+window_session = [% Dumper.dump_html(window_session) %]
 
 ## Per-Session Variables (shared between all open browser windows/tabs) ##
 
-[% Dumper.dump(session) %]
+session = [% Dumper.dump_html(session) %]
 </pre>
 </div> <!-- show_variables -->
 
