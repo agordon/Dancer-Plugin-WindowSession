@@ -24,10 +24,10 @@ Here's your chart:
 <br/>
 <br/>
 
-<img src="image.png?winsid=[% winsid | uri %]"/>
+<img src="[% request.uri_base %]/image.png?winsid=[% winsid | uri %]"/>
 
 <br/>
-<a class="btn btn-primary" href="settings?winsid=[% winsid | uri %]">Change Image Settings</a>
+<a class="btn btn-primary" href="[% request.uri_base %]/settings?winsid=[% winsid | uri %]">Change Image Settings</a>
 <a class="btn btn-danger" target="_blank" href="/">Open a new Browser Window</a>
 
 <br/>
