@@ -84,18 +84,8 @@ register window_session => sub {
 	my ($key,$value) = @_;
 	$key eq 'id' and croak 'Can\'t store to window_session key with name "id"';
 
-	if (defined $value) {
-		## Writ operation, as in:
-		##  window_session 'varname' => 'new_value';
-		$window_session->{$key} = $value;
-	} else {
-		## read operation, as in:
-		##   my $data = window_session 'varname';
-		$value = $window_session->{$key};
-		my $valuestr = $value // "(undefined)";
-		return $value if defined $value;
-	}
-	return ;
+	$window_session->{$key} = $value if (@_==2);
+	return $window_session->{$key};
 };
 
 register_plugin;
