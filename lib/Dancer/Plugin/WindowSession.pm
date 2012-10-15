@@ -19,8 +19,6 @@ sub _get_window_session_object
 	if (defined(var 'window_session_object')) {
 		$win_sess_obj = var 'window_session_object';
 		$win_sess_id = $win_sess_obj->id;
-		debug "Retrieving Existing Window-Session-ID from 'vars': $win_sess_id\n";
-
 		return $win_sess_obj;
 	}
 
@@ -28,18 +26,12 @@ sub _get_window_session_object
 	# This is the first time 'window_session' is request during this request handling,
 	# check if we have one in the HTTP Request
 	$win_sess_id = param 'winsid';
-	if ($win_sess_id) {
-		debug "Retrieving Existing Window-Session-ID from HTTP-Request: $win_sess_id\n";
-	} else {
-		debug "No Window-Session-ID found\n";
-	}
 
 	my $session_engine = engine 'session'
 		or die "Can't find session engine";
 
 	# If we have a Window-session-Id, try to retrieve the corresponding hash.
 	if ($win_sess_id) {
-		debug "Retieving existing Window-Session for ID $win_sess_id\n";
 		$win_sess_obj = $session_engine->retrieve($win_sess_id);
 
 		## If we failed to retrieve existing window-session, force a new one
@@ -48,10 +40,8 @@ sub _get_window_session_object
 
 	# If anything failed along the way, just create a new window session
 	if (!$win_sess_id) {
-		debug "Generating new Window-Session object" ;
 		$win_sess_obj = $session_engine->create();
 		$win_sess_id = $win_sess_obj->id;
-		debug "New Window-Session-ID: $win_sess_id\n";
 
 	}
 	## Cache the new window-session object,
@@ -62,7 +52,6 @@ sub _get_window_session_object
 }
 
 hook before => sub {
-	debug "Before-Hook: Getting Window-Session";
 	my $window_session = _get_window_session_object;
 	my $window_session_id = $window_session->id;
 };
@@ -74,14 +63,11 @@ hook before_template_render => sub {
 
 	$tokens->{winsid} = $window_session->id;
 	$tokens->{window_session} = Clone::clone($window_session);
-
-	debug "Before-Template-Render-Hook: adding window-session-id: ". $window_session->id ;
 };
 
 hook after => sub {
 	my $window_session = _get_window_session_object;
 	my $window_session_id = $window_session->id;
-	debug "After-Hook: Saving Window-Session: $window_session_id";
 	$window_session->flush();
 };
 
@@ -99,7 +85,6 @@ register window_session => sub {
 	$key eq 'id' and croak 'Can\'t store to window_session key with name "id"';
 
 	if (defined $value) {
-		debug "Window-Session ($window_session_id), setting $key => $value";
 		## Writ operation, as in:
 		##  window_session 'varname' => 'new_value';
 		$window_session->{$key} = $value;
@@ -108,7 +93,6 @@ register window_session => sub {
 		##   my $data = window_session 'varname';
 		$value = $window_session->{$key};
 		my $valuestr = $value // "(undefined)";
-		debug "Window-Session ($window_session_id), retrieving $key: returning $valuestr";
 		return $value if defined $value;
 	}
 	return ;
